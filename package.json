@@ -19,5 +19,8 @@
     "gulp-sass": "^4.0.2",
     "gulp-vue-single-file-component": "^1.0.12",
     "node-sass": "^4.13.1"
+  },
+  "dependencies": {
+    "envify": "^4.1.0"
   }
 }
