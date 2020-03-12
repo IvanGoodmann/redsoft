@@ -41,6 +41,26 @@
 <body>
 <div id="app">
     <headerGroup></headerGroup>
+    <section class="content">
+        <div class="container">
+            <div class="content-title">
+                {{contentTitle}}
+            </div>
+            <div class="card-group">
+                <card
+                    v-for="(card, cid) in cards"
+                    :key="card.cid"
+                    :title="card.title"
+                    :image="card.image"
+                    :oldprice="card.oldPrice"
+                    :newprice="card.newPrice"
+                ></card>
+            </div>
+        </div>
+    </section>
 </div>
+<style>
+
+</style>
 </body>
 </html>

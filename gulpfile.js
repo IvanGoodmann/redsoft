@@ -40,7 +40,7 @@ gulp.task('browser-sync', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch('app/sass/**/*.sass', gulp.parallel('sass'));
+  gulp.watch('app/scss/**/*.scss', gulp.parallel('sass'));
   gulp.watch('public/*.html', gulp.parallel('code'));
   gulp.watch('app/js/*.js', gulp.parallel('scripts'));
   gulp.watch('app/js/components/*.vue', gulp.parallel('vue'));

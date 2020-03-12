@@ -11,6 +11,32 @@ var app = new Vue({
     Footergroup
   },
   data: {
-    contentTitle: 'Картины эпохи Возрождения'
+    contentTitle: 'Картины эпохи Возрождения',
+    cards: [
+      {
+        title: '«Рождение Венеры» Сандро Боттичелли',
+        oldPrice: '3000000',
+        newPrice: '2000000',
+        image: 'img/card-img_01.png'
+      },
+      {
+        title: '«Тайная вечеря» Леонардо да Винчи',
+        oldPrice: '1000000',
+        newPrice: '2000000',
+        image: '@/img/card-img_01.jpg'
+      },
+      {
+        title: '«Сотворение Адама» Микеланджело',
+        oldPrice: '1000000',
+        newPrice: '2000000',
+        image: '@/img/card-img_01.jpg'
+      },
+      {
+        title: '«Урок анатомии» Рембрандт ',
+        oldPrice: '1000000',
+        newPrice: '2000000',
+        image: '@/img/card-img_01.jpg'
+      },
+    ]
   },
 });
