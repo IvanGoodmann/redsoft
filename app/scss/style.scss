@@ -1,12 +1,29 @@
+:root {
+  --color-main: #343030;
+  --color-white: #ffffff;
+  --button-bg: #403432;
+  --button-basket: #5B3A32;
+  --button-hover: #776763;
+  --button-disabled: #C1B4B1;
+}
+
 body {
+  box-sizing: border-box;
   font-family: 'Merriweather', serif;
   margin: 0;
   padding: 0;
+  color: var(--color-main);
   background: #E5E5E5;
 }
 
 .container {
+  box-sizing: border-box;
   max-width: 1170px;
   margin: 0 auto;
   padding: 0 15px;
+}
+
+.content {
+  height: calc(100vh - 98px);
+  padding: 45px 0;
 }
