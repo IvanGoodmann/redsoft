@@ -4,6 +4,12 @@ const gulp = require('gulp');
       babel = require('gulp-babel');
       rename = require('gulp-rename');
       vueComponent = require('gulp-vue-single-file-component');
+      uglify = require('gulp-uglify');
+      myth = require('gulp-myth');
+      csso = require('gulp-csso');
+      runSequence = require('gulp4-run-sequence');
+
+var concat = require('gulp-concat');
 
 gulp.task('code', () => {
   return gulp.src('public/*.html')
@@ -44,6 +50,29 @@ gulp.task('watch', () => {
   gulp.watch('public/*.html', gulp.parallel('code'));
   gulp.watch('app/js/*.js', gulp.parallel('scripts'));
   gulp.watch('app/js/components/*.vue', gulp.parallel('vue'));
+});
+
+gulp.task('build', () => {
+
+  gulp.src(['public/*.html'])
+    .pipe(gulp.dest('dist/'));
+
+  gulp.src('app/scss/**/*.scss')
+    .pipe(sass())
+    .pipe(myth())
+    .pipe(csso())
+    .pipe(gulp.dest('dist/css/'));
+
+  gulp.src(['public/js/*.js'])
+    .pipe(concat('index.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js/'));
+
+  gulp.src(['public/js/components/*.vue'])
+    .pipe(concat('index.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js/components/'));
+
 });
 
 gulp.task('default', gulp.parallel( 'scripts', 'vue', 'sass', 'browser-sync', 'watch'));

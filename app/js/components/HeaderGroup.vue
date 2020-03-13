@@ -30,7 +30,7 @@
                             <input type="search" id="search" placeholder="Поиск по названию картины">
                         </div>
                         <div class="button-box">
-                            <button type="submit" class="button-search">
+                            <button type="submit" class="custom-button button-search">
                                 Найти
                             </button>
                         </div>
@@ -110,24 +110,7 @@
             }
         }
     }
-    .button-box {
-        position: relative;
-        cursor: pointer;
-    }
     .button-search {
         min-width: 122px;
-        height: 100%;
-        font-size: 14px;
-        line-height: 1;
-        text-align: center;
-        outline: none;
-        border: none;
-        cursor: pointer;
-        color: var(--color-white);
-        background: var(--button-bg);
-        transition: all 400ms ease;
-        &:hover {
-            background: var(--button-hover);
-        }
     }
 </style>

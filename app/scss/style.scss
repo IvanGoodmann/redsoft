@@ -18,14 +18,33 @@ body {
 
 .container {
   box-sizing: border-box;
-  max-width: 1170px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 15px;
 }
 
 .content {
   height: calc(100vh - 98px);
   padding: 45px 0;
+}
+
+.button-box {
+  position: relative;
+  cursor: pointer;
+}
+.custom-button {
+  min-height: 48px;
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-white);
+  background: var(--button-bg);
+  transition: all 400ms ease;
+  &:hover {
+    background: var(--button-hover);
+  }
 }
 
 .content-title {

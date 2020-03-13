@@ -15,28 +15,28 @@ var app = new Vue({
     cards: [
       {
         title: '«Рождение Венеры» Сандро Боттичелли',
-        oldPrice: '3000000',
-        newPrice: '2000000',
-        image: 'img/card-img_01.png'
+        oldprice: '3000000 $',
+        newprice: '2000000 $',
+        image: 'img/card-img__01.png'
       },
       {
         title: '«Тайная вечеря» Леонардо да Винчи',
-        oldPrice: '1000000',
-        newPrice: '2000000',
-        image: '@/img/card-img_01.jpg'
+        newprice: '2000000 $',
+        image: 'img/card-img__02.png'
       },
       {
         title: '«Сотворение Адама» Микеланджело',
-        oldPrice: '1000000',
-        newPrice: '2000000',
-        image: '@/img/card-img_01.jpg'
+        oldprice: '1000000 $',
+        newprice: '2000000 $',
+        image: 'img/card-img__03.png'
       },
       {
         title: '«Урок анатомии» Рембрандт ',
-        oldPrice: '1000000',
-        newPrice: '2000000',
-        image: '@/img/card-img_01.jpg'
+        oldprice: '1000000 $',
+        newprice: '2000000 $',
+        image: 'img/card-img__04.png'
       },
     ]
   },
+
 });

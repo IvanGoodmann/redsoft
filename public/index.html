@@ -48,12 +48,12 @@
             </div>
             <div class="card-group">
                 <card
-                    v-for="(card, cid) in cards"
-                    :key="card.cid"
+                    v-for="(card, i) in cards"
+                    :key="card.i"
                     :title="card.title"
                     :image="card.image"
-                    :oldprice="card.oldPrice"
-                    :newprice="card.newPrice"
+                    :oldPrice="card.oldprice"
+                    :newPrice="card.newprice"
                 ></card>
             </div>
         </div>
