@@ -90,6 +90,7 @@
     }
     .header-content__search {
         & form {
+            overflow: hidden;
             display: flex;
             align-items: stretch;
         }
@@ -101,7 +102,7 @@
             color: #9F9F9F;
             outline: none;
             border: 1px solid #E1E1E1;
-            padding: 13px 60px 14px 16px;
+            padding: 13px 20px 14px 16px;
             background: none;
             transition: all 400ms ease;
             &:focus {

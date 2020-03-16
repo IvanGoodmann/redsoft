@@ -1,14 +1,16 @@
 <template>
-    <div class="card-group__item">
+    <div class="card-group__item"
+         :class="{itemSale: !sale}"
+    >
         <div class="card-group__item-image">
             <img :src="image" alt="">
         </div>
         <div class="card-group__item-info">
             <div class="item-info__title">
-              {{ title }}
+                {{ title }}
             </div>
             <div class="item-info__order">
-                <div class="item-info__order-prices">
+                <div class="item-info__order-prices" v-if="sale">
                     <div class="order-prices__old-price">
                         {{ oldprice }}
                     </div>
@@ -16,12 +18,19 @@
                         {{ newprice }}
                     </div>
                 </div>
-                <div class="button-box">
+                <div class="button-box" v-if="sale">
+                    <div class="loader" v-if="isLoaded"></div>
                     <button class="custom-button button-order"
-                        @click="order()"
+                            v-if="!isLoaded"
+                            @click="order()"
+                            :class="{isBasket: !sale}"
+                            :disabled="isDisabled"
                     >
-                        {{ orderButton }}
+                        <i v-if="buttonIcon"></i> {{ buttonText }}
                     </button>
+                </div>
+                <div class="item-info__sale" v-else>
+                    Продана на аукционе
                 </div>
             </div>
         </div>
@@ -30,37 +39,42 @@
 
 <script>
   export default {
-    props: ['title', 'image', 'oldprice', 'newprice'],
+    props: ['title', 'image', 'oldprice', 'newprice', 'sale'],
     data() {
       return {
+        buttonText: 'Купить',
+        buttonIcon: false,
+        isBasket: false,
+        isLoaded: false,
+        isDisabled: false,
       }
     },
     methods: {
-      order() {
+      async order() {
         const url = 'https://jsonplaceholder.typicode.com/posts/1';
-        fetch(url)
+        let vm = this;
+        vm.isLoaded = true;
+        fetch(url, {method: 'GET'})
           .then(
-            function (response) {
-              if(response.status !== 200) {
+            await function (response) {
+              if (response.status !== 200) {
                 console.log(response.status);
                 return;
               }
-              response.json().then(function(data) {
+              response.json()
+                .then(function (data) {
+                vm.buttonIcon = true;
+                vm.isBasket = true;
+                vm.buttonText = 'В корзине';
+                vm.isLoaded = false;
+                vm.isDisabled = true;
                 console.log(data);
               });
             }
           )
           .catch(function (error) {
             console.log(error)
-          })
-      }
-    },
-    computed: {
-      orderButton: function () {
-        if (this.response) {
-          return 'В корзине'
-        }
-        return 'Купить'
+          });
       }
     }
   };
@@ -73,44 +87,76 @@
         max-width: 280px;
         border: 1px solid #E1E1E1;
         padding: 1px;
+        &.itemSale {
+            user-select: none;
+            opacity: .5;
+        }
     }
+
     .card-group__item-image {
         & img {
             width: 100%;
         }
     }
+
     .card-group__item-info {
         padding: 20px 24px 24px;
     }
+
     .item-info__title {
         font-size: 18px;
         line-height: 1.5;
         margin-bottom: 22px;
     }
+
     .item-info__order {
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        min-height: 48px;
         &-prices {
             flex: 0 0 48%;
             width: 48%;
         }
     }
+
     .order-prices__old-price {
         font-size: 14px;
         line-height: 1.5;
         color: #A0A0A0;
         text-decoration: line-through;
     }
+
     .order-prices__new-price {
         font-size: 16px;
         font-weight: 700;
         line-height: 1.5;
     }
+
     .button-box {
         flex: 0 0 48%;
         width: 48%;
     }
+
     .button-order {
         width: 100%;
+        transition: all 400ms ease;
+        & i {
+            display: inline-flex;
+            width: 5px;
+            height: 10px;
+            border-bottom: 2px solid #F4F6F9;
+            border-right: 2px solid #F4F6F9;
+            margin-right: 5px;
+            transform: rotate(40deg);
+        }
+        &.isBasket {
+            background: var(--button-basket);
+        }
+    }
+
+    .item-info__sale {
+        font-size: 16px;
+        font-weight: 700;
     }
 </style>

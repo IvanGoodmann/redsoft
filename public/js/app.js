@@ -8,7 +8,7 @@ define(["vue", "./components/HeaderGroup", "./components/Card", "./components/Fo
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-  var app = new _vue.default({
+  const vm = new _vue.default({
     el: '#app',
     components: {
       Headergroup: _HeaderGroup.default,
@@ -18,20 +18,24 @@ define(["vue", "./components/HeaderGroup", "./components/Card", "./components/Fo
     data: {
       contentTitle: 'Картины эпохи Возрождения',
       cards: [{
+        sale: true,
         title: '«Рождение Венеры» Сандро Боттичелли',
         oldprice: '3000000 $',
         newprice: '2000000 $',
         image: 'img/card-img__01.png'
       }, {
+        sale: true,
         title: '«Тайная вечеря» Леонардо да Винчи',
         newprice: '2000000 $',
         image: 'img/card-img__02.png'
       }, {
+        sale: true,
         title: '«Сотворение Адама» Микеланджело',
         oldprice: '1000000 $',
         newprice: '2000000 $',
         image: 'img/card-img__03.png'
       }, {
+        sale: false,
         title: '«Урок анатомии» Рембрандт ',
         oldprice: '1000000 $',
         newprice: '2000000 $',

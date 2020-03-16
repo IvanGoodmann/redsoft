@@ -17,11 +17,13 @@ body {
 .container {
   box-sizing: border-box;
   max-width: 1200px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding: 0 15px; }
 
 .content {
-  height: calc(100vh - 98px);
-  padding: 45px 0; }
+  height: calc(100vh - 284px);
+  padding: 45px 0;
+  background: #E5E5E5; }
 
 .button-box {
   position: relative;
@@ -51,3 +53,38 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between; }
+
+.loader {
+  width: 30px;
+  height: 30px;
+  margin: 10px auto;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-radius: 50%;
+  border-top: 2px solid #d9d6d6;
+  border-right: 2px solid #d9d6d6;
+  border-bottom: 2px solid #d9d6d6;
+  border-left: 2px solid #403432;
+  -webkit-animation: load8 .5s infinite linear;
+  animation: load8 .5s infinite linear; }
+  .loader:after {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px; }
+
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
