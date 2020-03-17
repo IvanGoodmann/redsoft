@@ -1,32 +1,32 @@
 <template>
     <div class="card-group__item"
-         :class="{itemSale: !sale}"
+         :class="{itemSale: !card.sale}"
     >
         <div class="card-group__item-image">
-            <img :src="image" alt="">
+            <img :src="card.image" alt="">
         </div>
         <div class="card-group__item-info">
             <div class="item-info__title">
-                {{ title }}
+                {{ card.title }}
             </div>
             <div class="item-info__order">
-                <div class="item-info__order-prices" v-if="sale">
+                <div class="item-info__order-prices" v-if="card.sale">
                     <div class="order-prices__old-price">
-                        {{ oldprice }}
+                        {{ card.oldprice }}
                     </div>
                     <div class="order-prices__new-price">
-                        {{ newprice }}
+                        {{ card.newprice }}
                     </div>
                 </div>
-                <div class="button-box" v-if="sale">
-                    <div class="loader" v-if="isLoaded"></div>
+                <div class="button-box" v-if="card.sale">
+                    <div class="loader" v-if="param.isLoaded"></div>
                     <button class="custom-button button-order"
-                            v-if="!isLoaded"
+                            v-if="!param.isLoaded"
                             @click="order()"
-                            :class="{isBasket: !sale}"
-                            :disabled="isDisabled"
+                            :class="{isBasket: param.isDisabled}"
+                            :disabled="param.isDisabled"
                     >
-                        <i v-if="buttonIcon"></i> {{ buttonText }}
+                        <i v-if="param.buttonIcon"></i> {{ param.buttonText }}
                     </button>
                 </div>
                 <div class="item-info__sale" v-else>
@@ -39,21 +39,22 @@
 
 <script>
   export default {
-    props: ['title', 'image', 'oldprice', 'newprice', 'sale'],
+    props: ['card', 'sale', 'index'],
     data() {
       return {
-        buttonText: 'Купить',
-        buttonIcon: false,
-        isBasket: false,
-        isLoaded: false,
-        isDisabled: false,
+        param: {
+          buttonText: 'Купить',
+          buttonIcon: false,
+          isLoaded: false,
+          isDisabled: false
+        }
       }
     },
     methods: {
       async order() {
         const url = 'https://jsonplaceholder.typicode.com/posts/1';
         let vm = this;
-        vm.isLoaded = true;
+        vm.param.isLoaded = true;
         fetch(url, {method: 'GET'})
           .then(
             await function (response) {
@@ -63,12 +64,13 @@
               }
               response.json()
                 .then(function (data) {
-                vm.buttonIcon = true;
-                vm.isBasket = true;
-                vm.buttonText = 'В корзине';
-                vm.isLoaded = false;
-                vm.isDisabled = true;
-                console.log(data);
+                  let newParam = {
+                    buttonIcon: true,
+                    buttonText: 'В корзине',
+                    isLoaded: false,
+                  };
+
+                  console.log(data);
               });
             }
           )
@@ -76,6 +78,9 @@
             console.log(error)
           });
       }
+    },
+    created: function () {
+
     }
   };
 </script>
@@ -151,6 +156,7 @@
             transform: rotate(40deg);
         }
         &.isBasket {
+            cursor: default;
             background: var(--button-basket);
         }
     }

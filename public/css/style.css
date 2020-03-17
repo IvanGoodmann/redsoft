@@ -55,11 +55,10 @@ body {
   justify-content: space-between; }
 
 .loader {
+  position: relative;
   width: 30px;
   height: 30px;
-  margin: 10px auto;
-  font-size: 10px;
-  position: relative;
+  margin: 0 auto;
   text-indent: -9999em;
   border-radius: 50%;
   border-top: 2px solid #d9d6d6;

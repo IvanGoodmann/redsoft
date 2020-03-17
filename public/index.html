@@ -49,19 +49,16 @@
             </div>
             <div class="card-group">
                 <card
-                    v-for="(card, i) in cards"
-                    :key="card.i"
-                    :title="card.title"
-                    :image="card.image"
-                    :oldPrice="card.oldprice"
-                    :newPrice="card.newprice"
-                    :sale="card.sale"
+                    v-for="(card, id) in cards"
+                    :key="id"
+                    :card="card"
                 ></card>
             </div>
         </div>
     </section>
     <footerGroup></footerGroup>
 </div>
+
 <style>
 
 </style>

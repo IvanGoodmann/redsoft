@@ -63,16 +63,15 @@ body {
 }
 
 .loader {
+  position: relative;
   width: 30px;
   height: 30px;
-  margin: 10px auto;
-  font-size: 10px;
-  position: relative;
+  margin: 0 auto;
   text-indent: -9999em;
   border-radius: 50%;
-  border-top: 2px solid mix(white,#403432,80%);
-  border-right: 2px solid mix(white,#403432,80%);
-  border-bottom: 2px solid mix(white,#403432,80%);
+  border-top: 2px solid mix(#fff,#403432,80%);
+  border-right: 2px solid mix(#fff,#403432,80%);
+  border-bottom: 2px solid mix(#fff,#403432,80%);
   border-left: 2px solid #403432;
   -webkit-animation: load8 .5s infinite linear;
   animation: load8 .5s infinite linear;
