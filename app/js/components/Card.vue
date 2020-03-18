@@ -19,14 +19,14 @@
                     </div>
                 </div>
                 <div class="button-box" v-if="card.sale">
-                    <div class="loader" v-if="param.isLoaded"></div>
+                    <div class="loader" v-if="isLoading"></div>
                     <button class="custom-button button-order"
-                            v-if="!param.isLoaded"
+                            v-if="!isLoading"
                             @click="order()"
-                            :class="{isBasket: param.isDisabled}"
-                            :disabled="param.isDisabled"
+                            :class="{isBasket: isInCart}"
+                            :disabled="isDisabled"
                     >
-                        <i v-if="param.buttonIcon"></i> {{ param.buttonText }}
+                        <i v-if="isInCart"></i> {{ isInCart ? 'В корзине' : 'Купить'}}
                     </button>
                 </div>
                 <div class="item-info__sale" v-else>
@@ -39,37 +39,31 @@
 
 <script>
   export default {
-    props: ['card', 'sale', 'index'],
+    props: ['card', 'sale', 'index', 'cart'],
     data() {
       return {
-        param: {
-          buttonText: 'Купить',
-          buttonIcon: false,
-          isLoaded: false,
-          isDisabled: false
-        }
+        isLoading: false,
+        isDisabled: false
+      }
+    },
+    computed: {
+      isInCart() {
+        return this.cart.includes(this.index)
       }
     },
     methods: {
       async order() {
         const url = 'https://jsonplaceholder.typicode.com/posts/1';
-        let vm = this;
-        vm.param.isLoaded = true;
+        this.isLoading = true;
+
         fetch(url, {method: 'GET'})
           .then(
-            await function (response) {
-              if (response.status !== 200) {
-                console.log(response.status);
-                return;
-              }
+            async (response) => {
               response.json()
-                .then(function (data) {
-                  let newParam = {
-                    buttonIcon: true,
-                    buttonText: 'В корзине',
-                    isLoaded: false,
-                  };
-
+                .then((data) =>{
+                  this.isLoading = false;
+                  this.isDisabled = true;
+                  this.cart.push(this.index);
                   console.log(data);
               });
             }

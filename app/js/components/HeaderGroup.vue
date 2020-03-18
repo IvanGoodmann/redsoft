@@ -97,6 +97,7 @@
     }
     .header-content__search-input {
         & input {
+            height: 100%;
             font-size: 14px;
             line-height: 1;
             color: #9F9F9F;

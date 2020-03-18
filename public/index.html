@@ -52,6 +52,8 @@
                     v-for="(card, id) in cards"
                     :key="id"
                     :card="card"
+                    :cart="cart"
+                    :index="id"
                 ></card>
             </div>
         </div>
@@ -59,8 +61,5 @@
     <footerGroup></footerGroup>
 </div>
 
-<style>
-
-</style>
 </body>
 </html>

@@ -40,7 +40,25 @@ define(["vue", "./components/HeaderGroup", "./components/Card", "./components/Fo
         oldprice: '1000000 $',
         newprice: '2000000 $',
         image: 'img/card-img__04.png'
-      }]
+      }],
+      cart: []
+    },
+    watch: {
+      "cart": {
+        handler: function (cart) {
+          localStorage.setItem('cart', JSON.stringify(cart));
+        },
+        deep: true
+      }
+    },
+
+    created() {
+      let cart = JSON.parse(localStorage.getItem('cart'));
+
+      if (cart && Array.isArray(cart)) {
+        this.cart = cart;
+      }
     }
+
   });
 });

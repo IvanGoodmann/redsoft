@@ -6,7 +6,7 @@ define(["exports"], function (_exports) {
   });
   _exports.default = void 0;
   var _default = {
-    template: '<div class="card-group__item" :class="{itemSale: !card.sale}"><div class="card-group__item-image"><img :src="card.image" alt=""></div><div class="card-group__item-info"><div class="item-info__title">{{ card.title }}</div><div class="item-info__order"><div class="item-info__order-prices" v-if="card.sale"><div class="order-prices__old-price">{{ card.oldprice }}</div><div class="order-prices__new-price">{{ card.newprice }}</div></div><div class="button-box" v-if="card.sale"><div class="loader" v-if="param.isLoaded"></div><button class="custom-button button-order" v-if="!param.isLoaded" @click="order()" :class="{isBasket: param.isDisabled}" :disabled="param.isDisabled"><i v-if="param.buttonIcon"></i> {{ param.buttonText }}</button></div><div class="item-info__sale" v-else="">Продана на аукционе</div></div></div></div>',
+    template: '<div class="card-group__item" :class="{itemSale: !card.sale}"><div class="card-group__item-image"><img :src="card.image" alt=""></div><div class="card-group__item-info"><div class="item-info__title">{{ card.title }}</div><div class="item-info__order"><div class="item-info__order-prices" v-if="card.sale"><div class="order-prices__old-price">{{ card.oldprice }}</div><div class="order-prices__new-price">{{ card.newprice }}</div></div><div class="button-box" v-if="card.sale"><div class="loader" v-if="isLoading"></div><button class="custom-button button-order" v-if="!isLoading" @click="order()" :class="{isBasket: isInCart}" :disabled="isDisabled"><i v-if="isInCart"></i> {{ isInCart ? &#39;В корзине&#39; : &#39;Купить&#39;}}</button></div><div class="item-info__sale" v-else="">Продана на аукционе</div></div></div></div>',
 
     beforeCreate() {
       loadCss({
@@ -14,41 +14,35 @@ define(["exports"], function (_exports) {
       });
     },
 
-    props: ['card', 'sale', 'index'],
+    props: ['card', 'sale', 'index', 'cart'],
 
     data() {
       return {
-        param: {
-          buttonText: 'Купить',
-          buttonIcon: false,
-          isLoaded: false,
-          isDisabled: false
-        }
+        isLoading: false,
+        isDisabled: false
       };
     },
 
+    computed: {
+      isInCart() {
+        return this.cart.includes(this.index);
+      }
+
+    },
     methods: {
       async order() {
         const url = 'https://jsonplaceholder.typicode.com/posts/1';
-        let vm = this;
-        vm.param.isLoaded = true;
+        this.isLoading = true;
         fetch(url, {
           method: 'GET'
-        }).then((await function (response) {
-          if (response.status !== 200) {
-            console.log(response.status);
-            return;
-          }
-
-          response.json().then(function (data) {
-            let newParam = {
-              buttonIcon: true,
-              buttonText: 'В корзине',
-              isLoaded: false
-            };
+        }).then(async response => {
+          response.json().then(data => {
+            this.isLoading = false;
+            this.isDisabled = true;
+            this.cart.push(this.index);
             console.log(data);
           });
-        })).catch(function (error) {
+        }).catch(function (error) {
           console.log(error);
         });
       }
