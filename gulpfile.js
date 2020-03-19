@@ -64,13 +64,10 @@ gulp.task('build', () => {
     .pipe(gulp.dest('dist/css/'));
 
   gulp.src(['public/js/*.js'])
-    .pipe(concat('index.js'))
-    .pipe(uglify())
+    .pipe(concat('app.js'))
     .pipe(gulp.dest('dist/js/'));
 
-  gulp.src(['public/js/components/*.vue'])
-    .pipe(concat('index.js'))
-    .pipe(uglify())
+  gulp.src(['public/js/components/*.js'])
     .pipe(gulp.dest('dist/js/components/'));
 
 });

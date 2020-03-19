@@ -14,7 +14,7 @@ define(["exports"], function (_exports) {
       });
     },
 
-    props: ['card', 'sale', 'index', 'cart'],
+    props: ['card', 'sale', 'app.js', 'cart'],
 
     data() {
       return {

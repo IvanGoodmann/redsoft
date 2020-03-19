@@ -39,7 +39,7 @@
 
 <script>
   export default {
-    props: ['card', 'sale', 'index', 'cart'],
+    props: ['card', 'sale', 'app.js', 'cart'],
     data() {
       return {
         isLoading: false,
